@@ -9,6 +9,4 @@ Route::get('/', function () {
     return view('pruebas.cuadros');
 });
 
-Route::controller(HotelController::class)->group(function(){
-    Route::get('hotel', 'index');
-});
+Route::resource('hotel', HotelController::class);

@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('nombre');
             $table->string('direccion');
             $table->integer('n pisos');
-
             $table->timestamps();
         });
     }

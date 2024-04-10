@@ -17,7 +17,11 @@ class HotelFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+
+            'nombre' => fake()->word(),
+            'direccion' => fake()->address(),
+            'n_pisos' => fake()->numberBetween(2, 10),
+            
         ];
     }
 }

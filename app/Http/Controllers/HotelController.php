@@ -23,6 +23,7 @@ class HotelController extends Controller
      */
     public function create()
     {
+        return view('hotel.create');
 
     }
 

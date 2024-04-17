@@ -33,14 +33,13 @@ class HotelController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nombre' => 'nombre',
-            'direccion' => 'direccion',
-            'pisos' => 'pisos',
+            'nombre' => 'required|max:255',
+            'direccion' => 'required|max:255',
+            'n_pisos' => 'required|integer',
         ]);
-
         Hotel::create($request->all());
 
-        return ;
+        return redirect()->route('hotel.index');
         
     }
 
@@ -55,17 +54,26 @@ class HotelController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Hotel $hotel)
+    public function edit(Hotel $id)
     {
-        //
+        $hotel = Hotel::findOrFail($id);
+        return view('hotel.edit', compact('hotel'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Hotel $hotel)
+    public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|max:255',
+            'direccion' => 'required|max:255',
+            'n_pisos' => 'required|integer',
+        ]);
+        $hotel=Hotel::findOrFail($id);
+        $hotel->update($request->all());
+
+        return redirect()->route('hotel.index');
     }
 
     /**
@@ -73,6 +81,9 @@ class HotelController extends Controller
      */
     public function destroy(Hotel $hotel)
     {
-        //
+        $hotel->delete();
+        return redirect()->route('hotel.index');
+
+
     }
 }
